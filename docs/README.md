@@ -31,7 +31,7 @@ To update session:
 
 #### `useRenderSession`
 
-The fastest response to a session value. It uses the session response from render-session. One caveat: the session values are limited to a [set of values](https://github.com/vtex-apps/render-session/blob/master/src/constants.ts). If you need fields that are not in this set, you can use [`useFullSession`](#useFullSession) or [`useLazyFullSession`](#useLazyFullSession).
+The fastest way to access a session value. It uses the session response from render-session. One caveat: the session values are limited to a [set of values](https://github.com/vtex-apps/render-session/blob/master/src/constants.ts). If you need fields that are not in this set, you can use [`useFullSession`](#useFullSession) or [`useLazyFullSession`](#useLazyFullSession).
 
 **Usage**
 
@@ -57,7 +57,6 @@ function MyComponent() {
 
 export default MyComponent
 ```
-
 
 #### `useFullSession`
 
@@ -91,7 +90,6 @@ function MyComponent() {
 
 export default MyComponent
 ```
-
 
 It also accepts a GraphQL variable called `items` which is an array of strings of session items to fetch only certain items of the session.
 
@@ -244,7 +242,7 @@ query session($items: [String]) {
 }
 ```
 
-#### updateSesion Mutation
+#### updateSession Mutation
 
 Changes the current user session.
 

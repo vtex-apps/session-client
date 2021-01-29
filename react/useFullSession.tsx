@@ -7,8 +7,12 @@ interface Data {
   session: Session
 }
 
+interface Variables {
+  items?: string[]
+}
+
 function useFullSession(options?: Omit<QueryHookOptions<Data>, 'ssr'>) {
-  return useQuery<Data>(SessionQuery, {
+  return useQuery<Data, Variables>(SessionQuery, {
     ...options,
     ssr: false,
   })

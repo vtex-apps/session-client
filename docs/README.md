@@ -92,6 +92,19 @@ function MyComponent() {
 export default MyComponent
 ```
 
+
+It also accepts a GraphQL variable called `items` which is an array of strings of session items to fetch only certain items of the session.
+
+Example:
+
+```tsx
+useFullSession({
+  variables: {
+    items: ['store.channel', 'store.countryCode']
+  }
+})
+```
+
 #### `useLazyFullSession`
 
 The same as [`useFullSession`](#useFullSession) but it uses the React Apollo's `useLazyQuery` hook. You can [read more about `useLazyQuery` API](https://www.apollographql.com/docs/react/api/react/hooks/#uselazyquery).
@@ -111,6 +124,18 @@ function MyComponent() {
 }
 
 export default MyComponent
+```
+
+It also accepts a GraphQL variable called `items` which is an array of strings of session items to fetch only a subset of fields of the session.
+
+Example:
+
+```tsx
+useLazyFullSession({
+  variables: {
+    items: ['store.channel', 'store.countryCode']
+  }
+})
 ```
 
 #### `useUpdateSession`
@@ -183,6 +208,19 @@ function MyComponent() {
 export default MyComponent
 ```
 
+It also accepts a GraphQL variable called `items` which is an array of strings of session items to fetch only a subset of fields of the session.
+
+Example:
+
+```tsx
+updateSession({
+  variables: {
+    fields: { foo: 'bar', baz: 123 },
+    items: ['store.channel', 'store.countryCode']
+  }
+})
+```
+
 ### GraphQL
 
 #### session Query
@@ -192,8 +230,8 @@ Get the current user session.
 **Usage**
 
 ```graphql
-query session {
-  session @context(provider: "vtex.session-client") {
+query session($items: [String]) {
+  session(items: $items) @context(provider: "vtex.session-client") {
     ... on SessionSuccess {
       id
       namespaces
@@ -215,8 +253,9 @@ Changes the current user session.
 Variables: `{ "fields": { "foo": 123, "baz": "abc" } }`
 
 ```graphql
-mutation updateSession($fields: SessionFieldsJSONInput) {
-  updateSession(fields: $fields) @context(provider: "vtex.session-client") {
+mutation updateSession($fields: SessionFieldsJSONInput!, $items: [String]) {
+  updateSession(fields: $fields, items: $items)
+    @context(provider: "vtex.session-client") {
     ... on SessionSuccess {
       id
       namespaces

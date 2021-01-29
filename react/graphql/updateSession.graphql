@@ -1,5 +1,6 @@
-mutation updateSession($fields: SessionFieldsJSONInput) {
-  updateSession(fields: $fields) @context(provider: "vtex.session-client") {
+mutation updateSession($fields: SessionFieldsJSONInput!, $items: [String]) {
+  updateSession(fields: $fields, items: $items)
+    @context(provider: "vtex.session-client") {
     ... on SessionSuccess {
       id
       namespaces

@@ -9,6 +9,7 @@ interface Data {
 
 interface Variables {
   fields: Record<string, string | number>
+  items?: string[]
 }
 
 function useUpdateSessionInline(options?: QueryHookOptions<Data, Variables>) {

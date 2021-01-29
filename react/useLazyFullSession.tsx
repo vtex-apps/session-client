@@ -7,7 +7,11 @@ interface Data {
   session: Session
 }
 
-function useLazyFullSession(options?: QueryHookOptions<Data>) {
+interface Variables {
+  items?: string[]
+}
+
+function useLazyFullSession(options?: QueryHookOptions<Data, Variables>) {
   return useLazyQuery<Data>(SessionQuery, options)
 }
 

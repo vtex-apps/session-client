@@ -5,11 +5,12 @@ import { getSessionToken } from '../modules/sessionToken'
 
 interface Args {
   fields: Array<{ name: string; value: string | number }>
+  items?: string[]
 }
 
 export async function updateSession(
   _: any,
-  { fields }: Args,
+  { fields, items }: Args,
   context: ServiceContext<Clients>
 ) {
   const {
@@ -20,7 +21,7 @@ export async function updateSession(
 
   await customSession.updateSession(fields, sessionCookie)
 
-  const { sessionData } = await customSession.getSession(sessionCookie)
+  const { sessionData } = await customSession.getSession(sessionCookie, items)
 
   return sessionData
 }

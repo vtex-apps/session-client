@@ -1,5 +1,5 @@
-query session {
-  session @context(provider: "vtex.session-client") {
+query session($items: [String]) {
+  session(items: $items) @context(provider: "vtex.session-client") {
     ... on SessionSuccess {
       id
       namespaces

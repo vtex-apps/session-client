@@ -14,7 +14,7 @@ export class Session extends JanusClient {
   /**
    * Get the session data using the given token
    */
-  public getSession = async (token: string) => {
+  public getSession = async (token: string, items: string[] = ['*']) => {
     const {
       data: sessionData,
       headers: {
@@ -27,7 +27,7 @@ export class Session extends JanusClient {
       },
       metric: 'session-get',
       params: {
-        items: '*',
+        items: items.join(','),
       },
     })
 

@@ -5,9 +5,13 @@ import { getSessionToken } from '../modules/sessionToken'
 
 export const VTEX_SESSION = 'vtex_session'
 
+interface Args {
+  items?: string[]
+}
+
 export async function session(
   _: any,
-  _args: any,
+  { items }: Args,
   context: ServiceContext<Clients>
 ) {
   const {
@@ -16,7 +20,7 @@ export async function session(
 
   const sessionCookie = getSessionToken(context.cookies)
 
-  const { sessionData } = await customSession.getSession(sessionCookie)
+  const { sessionData } = await customSession.getSession(sessionCookie, items)
 
   return sessionData
 }

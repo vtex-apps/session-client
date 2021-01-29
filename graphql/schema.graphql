@@ -1,9 +1,9 @@
 type Query {
-  session: Session @cacheControl(scope: PRIVATE, maxAge: SHORT)
+  session(items: [String]): Session @cacheControl(scope: PRIVATE, maxAge: SHORT)
 }
 
 type Mutation {
-  updateSession(fields: SessionFieldsJSONInput): Session
+  updateSession(fields: SessionFieldsJSONInput!, items: [String]): Session
 }
 
 union Session = SessionError | SessionSuccess

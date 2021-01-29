@@ -91,7 +91,7 @@ function MyComponent() {
 export default MyComponent
 ```
 
-It also accepts a GraphQL variable called `items` which is an array of strings of session items to fetch only certain items of the session.
+It also accepts a GraphQL variable called `items` which is an array of `string`s. These `string`s should match attributes inside of the Session object, and only those attributes will be fetched and returned.
 
 Example:
 
@@ -105,7 +105,7 @@ useFullSession({
 
 #### `useLazyFullSession`
 
-The same as [`useFullSession`](#useFullSession) but it uses the React Apollo's `useLazyQuery` hook. You can [read more about `useLazyQuery` API](https://www.apollographql.com/docs/react/api/react/hooks/#uselazyquery).
+The same as [`useFullSession`](#useFullSession) but it uses React Apollo's `useLazyQuery` hook. You can [read more about `useLazyQuery` API](https://www.apollographql.com/docs/react/api/react/hooks/#uselazyquery).
 
 **Usage**
 
@@ -124,7 +124,7 @@ function MyComponent() {
 export default MyComponent
 ```
 
-It also accepts a GraphQL variable called `items` which is an array of strings of session items to fetch only a subset of fields of the session.
+It also accepts a GraphQL variable called `items` which is an array of `string`s. These `string`s should match attributes inside of the Session object, and only those attributes will be fetched and returned.
 
 Example:
 
@@ -206,7 +206,7 @@ function MyComponent() {
 export default MyComponent
 ```
 
-It also accepts a GraphQL variable called `items` which is an array of strings of session items to fetch only a subset of fields of the session.
+It also accepts a GraphQL variable called `items` which is an array of `string`s. These `string`s should match attributes inside of the Session object, and only those attributes will be fetched and returned.
 
 Example:
 

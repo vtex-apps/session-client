@@ -4,7 +4,7 @@ import UpdateSesionMutation from './graphql/updateSession.graphql'
 import type { Session } from './SessionTypes'
 
 interface Data {
-  udpateSession: Session
+  updateSession: Session
 }
 
 interface Variables {

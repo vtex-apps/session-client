@@ -1,0 +1,23 @@
+type Query {
+  session: Session @cacheControl(scope: PRIVATE, maxAge: SHORT)
+}
+
+type Mutation {
+  updateSession(fields: SessionFieldsJSONInput): Session
+}
+
+union Session = SessionError | SessionSuccess
+
+scalar SessionNamespaces
+
+type SessionSuccess {
+  id: String!
+  namespaces: SessionNamespaces
+}
+
+type SessionError {
+  type: String
+  message: String
+}
+
+scalar SessionFieldsJSONInput

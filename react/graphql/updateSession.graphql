@@ -1,0 +1,13 @@
+mutation updateSession($fields: SessionFieldsJSONInput!, $items: [String]) {
+  updateSession(fields: $fields, items: $items)
+    @context(provider: "vtex.session-client") {
+    ... on SessionSuccess {
+      id
+      namespaces
+    }
+    ... on SessionError {
+      type
+      message
+    }
+  }
+}

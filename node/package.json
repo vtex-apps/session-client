@@ -1,0 +1,13 @@
+{
+  "dependencies": {
+    "cookie": "^0.4.1"
+  },
+  "devDependencies": {
+    "@types/cookie": "^0.4.0",
+    "@types/node": "^12.0.0",
+    "@vtex/api": "6.39.0",
+    "@vtex/tsconfig": "^0.4.4",
+    "typescript": "3.9.7"
+  },
+  "version": "0.2.1"
+}

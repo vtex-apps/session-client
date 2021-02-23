@@ -1,0 +1,12 @@
+query session($items: [String]) {
+  session(items: $items) @context(provider: "vtex.session-client") {
+    ... on SessionSuccess {
+      id
+      namespaces
+    }
+    ... on SessionError {
+      type
+      message
+    }
+  }
+}

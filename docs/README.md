@@ -1,39 +1,39 @@
 # Session Client
 
-> App that provides React hooks and GraphQL queries to read and update Session.
+The Session Client app provides React hooks and GraphQL queries for your components to read and update the [VTEX Session cookie](https://help.vtex.com/en/tutorial/vtex-session-sessions-system-overview--6C4Edou6bYqqEAOCAg2MQQ), responsible for saving data of a specific session of a user browsing in your store. 
 
-## Setup
+## Installation
 
-Add this app as a dependency of your React VTEX IO app:
+In your React app's `manifest.json` file, add the Session Client app in the dependency list:
 
-```bash
-vtex add vtex.session-client
+```
+"dependencies": {
+    "vtex.session-client": "1.x"
+  }
 ```
 
-You can have full TypeScript support running `vtex setup --typings` afterwards.
+> :information_source: *You can have full TypeScript support running `vtex setup --typings` in your CLI afterwards.*
 
-## Usage
+## Configuration
 
-### React Hooks
+The Session Client's React hooks allow you to read and update the VTEX Session cookie as desired. On the other hand, the GraphQL query and mutation enable your app to fetch the current user session and change it, respectively.
 
-The recommended way to use the session client is through the React hooks provided.
+### React hooks
 
-To read session:
+To read the VTEX Session cookie:
 
 - [`useRenderSession`](#useRenderSession)
 - [`useFullSession`](#useFullSession)
 - [`useLazyFullSession`](#useLazyFullSession)
 
-To update session:
+To update the VTEX Session cookie:
 
 - [`useUpdateSession`](#useUpdateSession)
 - [`useUpdateSessionInline`](#useUpdateSessionInline)
 
-#### `useRenderSession`
+#### `useRenderSession` hook
 
-The fastest way to access a session value. It uses the session response from render-session. One caveat: the session values are limited to a [set of values](https://github.com/vtex-apps/render-session/blob/master/src/constants.ts). If you need fields that are not in this set, you can use [`useFullSession`](#useFullSession) or [`useLazyFullSession`](#useLazyFullSession).
-
-**Usage**
+This hook is the fastest way to access a session data, using the session response from `render-session`. One caveat: the session values are limited to a [set of values](https://github.com/vtex-apps/render-session/blob/master/src/constants.ts). If you need fields that are not in this set, you can use [`useFullSession`](#useFullSession) or [`useLazyFullSession`](#useLazyFullSession).
 
 ```tsx
 import React from 'react'
@@ -58,15 +58,14 @@ function MyComponent() {
 export default MyComponent
 ```
 
-#### `useFullSession`
+#### `useFullSession` hook
 
-> ⚠️ It's not possible to return the session during Server Side Rendering, since that's a private query.
+> ⚠️ *It's not possible to return the session during Server Side Rendering, since it is a private query.*
 
 Runs a GraphQL query on the client side to query the full user session.
 
-Under the hood it's just a wrapper of React Apollo's `useQuery` passing the GraphQL session query. You can [read more about the `useQuery` API](https://www.apollographql.com/docs/react/api/react/hooks/#usequery).
+Under the hood, it's a wrapper of React Apollo's `useQuery` passing the GraphQL session query. You can read more about the `useQuery` API [here](https://www.apollographql.com/docs/react/api/react/hooks/#usequery).
 
-**Usage**
 
 ```tsx
 import React from 'react'
@@ -91,9 +90,9 @@ function MyComponent() {
 export default MyComponent
 ```
 
-It also accepts a GraphQL variable called `items` which is an array of `string`s. These `string`s should match attributes inside of the Session object, and only those attributes will be fetched and returned.
+It also accepts a GraphQL variable called `items` which is an array of strings. These strings should match attributes inside of the Session object, and only those attributes will be then fetched and returned.
 
-Example:
+For example:
 
 ```tsx
 useFullSession({
@@ -103,11 +102,9 @@ useFullSession({
 })
 ```
 
-#### `useLazyFullSession`
+#### `useLazyFullSession` hook
 
-The same as [`useFullSession`](#useFullSession) but it uses React Apollo's `useLazyQuery` hook. You can [read more about `useLazyQuery` API](https://www.apollographql.com/docs/react/api/react/hooks/#uselazyquery).
-
-**Usage**
+The same as [`useFullSession`](#useFullSession) but it uses React Apollo's `useLazyQuery` hook instead. You can read more about `useLazyQuery` API [here](https://www.apollographql.com/docs/react/api/react/hooks/#uselazyquery).
 
 ```tsx
 import React from 'react'
@@ -124,9 +121,9 @@ function MyComponent() {
 export default MyComponent
 ```
 
-It also accepts a GraphQL variable called `items` which is an array of `string`s. These `string`s should match attributes inside of the Session object, and only those attributes will be fetched and returned.
+It also accepts a GraphQL variable called `items` which is an array of strings. These strings should match attributes inside of the Session object, and only those attributes will be then fetched and returned.
 
-Example:
+For example:
 
 ```tsx
 useLazyFullSession({
@@ -136,15 +133,13 @@ useLazyFullSession({
 })
 ```
 
-#### `useUpdateSession`
+#### `useUpdateSession` hook
 
-Update the values of the session. Under the hood it uses React Apollo's `useMutation` hook. You can [read more about `useMutation` API](https://www.apollographql.com/docs/react/api/react/hooks/#usemutation).
+Updates the values of a session. Under the hood, it uses React Apollo's `useMutation` hook. You can read more about `useMutation` API [here](https://www.apollographql.com/docs/react/api/react/hooks/#usemutation).
 
-Differently from the `useMutation` hook, this hook only returns the mutation function (in the example bellow called `updateSession`), it doesn't return the mutation result. 
+Differently from the `useMutation` hook, this one only returns the mutation function (called in the example below as `updateSession`) — It does not return the mutation result. 
 
-After calling the mutation function, it will reload the page. This is to guarantee that the whole page data is updated to the new session parameters. Example: sometimes search results changes depending on the session values.
-
-**Usage**
+After calling the mutation function, the hook reloads the page, guaranteeing that the whole page data is updated to the new session parameters. This is extremely useful in pages where the content changes according to the session values, such as the search results. 
 
 ```tsx
 import React from 'react'
@@ -171,13 +166,11 @@ function MyComponent() {
 export default MyComponent
 ```
 
-#### `useUpdateSessionInline`
+#### `useUpdateSessionInline` hook
 
-Update the values of the session. Under the hood it uses React Apollo's `useMutation` hook. You can [read more about `useMutation` API](https://www.apollographql.com/docs/react/api/react/hooks/#usemutation).
+Updates the values of a session. Under the hood, it uses React Apollo's `useMutation` hook. You can read more about `useMutation` API [here](https://www.apollographql.com/docs/react/api/react/hooks/#usemutation).
 
-Differently from [`useUpdateSession`](#useUpdateSession), this hook will not reload the page after calling the mutation function.
-
-**Usage**
+Differently from the [`useUpdateSession`](#useUpdateSession), this hook will not reload the page after calling the mutation function.
 
 ```tsx
 import React from 'react'
@@ -206,9 +199,9 @@ function MyComponent() {
 export default MyComponent
 ```
 
-It also accepts a GraphQL variable called `items` which is an array of `string`s. These `string`s should match attributes inside of the Session object, and only those attributes will be fetched and returned.
+It also accepts a GraphQL variable called `items` which is an array of strings. These strings should match attributes inside of the Session object, and only those attributes will be then fetched and returned.
 
-Example:
+For example:
 
 ```tsx
 updateSession({
@@ -219,13 +212,11 @@ updateSession({
 })
 ```
 
-### GraphQL
+### GraphQL query and mutation
 
-#### session Query
+#### `session` query
 
-Get the current user session.
-
-**Usage**
+Gets the current user session.
 
 ```graphql
 query session($items: [String]) {
@@ -242,13 +233,9 @@ query session($items: [String]) {
 }
 ```
 
-#### updateSession Mutation
+#### `updateSession` mutation
 
-Changes the current user session.
-
-**Usage**
-
-Variables: `{ "fields": { "foo": 123, "baz": "abc" } }`
+Changes the current user session using the following variables: `{ "fields": { "foo": 123, "baz": "abc" } }`
 
 ```graphql
 mutation updateSession($fields: SessionFieldsJSONInput!, $items: [String]) {

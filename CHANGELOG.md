@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- Fixes GraphQL mermaid diagrams
+
 ## [1.0.4] - 2025-02-10
 
 ### Added

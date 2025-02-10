@@ -15,9 +15,6 @@ classDiagram
     session(items [String]) Session
   }
 
-  class Session {
-  }
-
   class SessionError {
     String type
     String message
@@ -71,9 +68,6 @@ classDiagram
 
     class Mutation {
         updateSession(fields SessionFieldsJSONInput!, items [String]) Session
-    }
-
-    class Session {
     }
 
     class SessionError {
